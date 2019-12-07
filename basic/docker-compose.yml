@@ -3,6 +3,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:10.3'
     container_name: matomo_mariadb
+    #network_mode:  "host"
     environment:
       - MARIADB_USER=bn_matomo
       - MARIADB_DATABASE=bitnami_matomo
@@ -10,28 +11,33 @@ services:
       - MARIADB_EXTRA_FLAGS=--max_allowed_packet=64MB
       - TZ=Asia/Taipei
     volumes:
-      - 'mariadb_data:/matomo'
+#      - 'mariadb_data:/matomo'
+       - $PWD/data/db:/matomo
   matomo:
     image: 'bitnami/matomo:3'
-    container_name: mysql
+    container_name: matomo
     environment:
       - MARIADB_HOST=mariadb
+ #     - MARIADB_HOST=localhost
       - MARIADB_PORT_NUMBER=3306
       - MATOMO_DATABASE_USER=bn_matomo
       - MATOMO_DATABASE_NAME=bitnami_matomo
       - ALLOW_EMPTY_PASSWORD=yes
       - TZ=Asia/Taipei
-      - MATOMO_ENABLE_PROXY_URI_HEADER=yes
+#      - MATOMO_ENABLE_PROXY_URI_HEADER=yes
     ports:
       - '80:80'
       - '443:443'
+#    network_mode:  "host"
     depends_on:
       - mariadb
     volumes:
-      - 'matomo_data:/bitnami'
-      - $PWD/config.ini.php:/bitnami/matomo/config/config.ini.php
-volumes:
-  mariadb_data:
-    driver: local
-  matomo_data:
-    driver: local
+       - $PWD/data/matomo:/bitnami
+#      - 'matomo_data:/bitnami'
+#      - $PWD/config.ini.php:/bitnami/matomo/config/config.ini.php
+#
+#volumes:
+#  mariadb_data:
+#    driver: local
+#  matomo_data:
+#    driver: local
