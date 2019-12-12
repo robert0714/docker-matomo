@@ -11,8 +11,8 @@ trusted_hosts[]=127.0.0.1
 trusted_hosts[]=example.org
 proxy_uri_header=1
 enable_trusted_host_check=0
-force_ssl=1
-assume_secure_protocol=1
+force_ssl=0
+assume_secure_protocol=0
 
 [PluginsInstalled]
 PluginsInstalled[]=Diagnostics

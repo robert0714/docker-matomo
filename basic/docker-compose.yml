@@ -24,6 +24,8 @@ services:
       - MATOMO_DATABASE_NAME=bitnami_matomo
       - ALLOW_EMPTY_PASSWORD=yes
       - TZ=Asia/Taipei
+#      - MATOMO_EMAIL="user@testmatomo.pjm.iisigroup.com"
+#      - MATOMO_WEBSITE_HOST="https://testmatomo.pjm.iisigroup.com"
 #      - MATOMO_ENABLE_PROXY_URI_HEADER=yes
     ports:
       - '80:80'
@@ -32,6 +34,11 @@ services:
     depends_on:
       - mariadb
     volumes:
+#       - $PWD/server.key:/opt/bitnami/apache/conf/bitnami/certs/server.key
+#       - $PWD/server.crt:/opt/bitnami/apache/conf/bitnami/certs/server.crt
+#       - $PWD/httpd.conf:/opt/bitnami/apache/conf/httpd.conf
+#       - $PWD/bitnami.conf:/opt/bitnami/apache/conf/bitnami/bitnami.conf
+#       - $PWD/bitnami-ssl.conf:/opt/bitnami/apache/conf/bitnami/bitnami-ssl.conf
        - $PWD/data/matomo:/bitnami
 #      - 'matomo_data:/bitnami'
 #      - $PWD/config.ini.php:/bitnami/matomo/config/config.ini.php
